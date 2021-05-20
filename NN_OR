@@ -1,0 +1,22 @@
+import numpy,random,os
+learning_rate = 1
+bias = 1
+weights = list()
+for i in range(3):
+    weights.append(random.random())  
+def perceptron(input1,input2,output):
+    outp_pn = input1*weights[0]+input2*weights[1]+bias*weights[2]
+    outp_pn = 1.0/(1+numpy.exp(-outp_pn))   #Sigmoid Function
+    error = output - outp_pn
+    weights[0] += error*input1*learning_rate   #Modifying weights
+    weights[1] += error*input2*learning_rate
+    weights[2] += error*bias*learning_rate
+for i in range(50):   
+    perceptron(0,0,0)    
+    perceptron(1,1,1)
+    perceptron(1,0,1)
+    perceptron(0,1,1)
+for x,y in [(0,0),(1,0),(0,1),(1,1)]:
+    outp_pn = x*weights[0]+y*weights[1]+bias*weights[2]
+    output = 1.0/(1+numpy.exp(-outp_pn))
+    print x,"OR",y,"yields:",output
